@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
     }
 
@@ -54,8 +55,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void createNewUserDB() {
+        ArrayList temp = new ArrayList<>();
         String name = currentUser.getDisplayName();
-        usersRef.child(currentUser.getUid()).setValue(name);
+        usersRef.child(currentUser.getUid()).child("username").setValue(name);
     }
 
     /**
@@ -103,15 +105,12 @@ public class LoginActivity extends AppCompatActivity {
                         loadUserFromDB();
                         isNewUser = false;
                         break;
-
                     }
                 }
                 if (isNewUser){
                     createNewUserDB();}
                 switchScreen();
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
