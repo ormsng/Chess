@@ -55,17 +55,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void createNewUserDB() {
-        ArrayList temp = new ArrayList<>();
         String name = currentUser.getDisplayName();
         usersRef.child(currentUser.getUid()).child("username").setValue(name);
+        usersRef.child(currentUser.getUid()).child("wins").setValue(0);
+        usersRef.child(currentUser.getUid()).child("losses").setValue(0);
     }
 
     /**
-     *
      * Google API, checking if the currentUser is null if yes, he will need to login/Register.
      * If the user will register the data will be written in FB, if the user already exists,
      * the it will load from FB
      */
+
     private void login(FirebaseUser currentUser) {
         if (currentUser == null) {//not found in DB
             // Choose authentication providers
@@ -88,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Triggered the FB with Query and check if the user already exists
      * if the user exists it will change to boolean isNewUser to false
@@ -100,15 +100,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 isNewUser = true;
-                for (DataSnapshot snap:snapshot.getChildren()) {
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     if (currentUser.getUid().equals(snap.getKey())) {
                         loadUserFromDB();
                         isNewUser = false;
                         break;
                     }
                 }
-                if (isNewUser){
-                    createNewUserDB();}
+                if (isNewUser) {
+                    createNewUserDB();
+                }
                 switchScreen();
             }
 
@@ -116,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 
 

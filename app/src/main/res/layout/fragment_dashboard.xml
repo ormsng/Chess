@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chessboard2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/main_LBL_enemyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="    Join a game to start playing"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:layout_marginLeft="10sp"
+            />
+
+        <TextView
+            android:id="@+id/main_LBL_enemyScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCORE: 0/0"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginRight="10sp"
+            android:visibility="invisible"
+            />
+
+    </RelativeLayout>
+
+
+    <GridLayout
+        android:layout_marginTop="45sp"
+        android:id="@+id/chess_board"
+        android:layout_width="match_parent"
+        android:layout_height="475sp"
+        android:columnCount="8"
+        android:rowCount="8"
+        >
+
+        <TextView
+            android:id="@+id/game_TXT_r0c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♜"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r0c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♞"
+            />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r0c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♝"
+            />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r0c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♛"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r0c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♚"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r0c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♝"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r0c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♞"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r0c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♜"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r1c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r2c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:textColor="@color/black"
+            android:background="@color/dark_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/game_TXT_r2c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:textColor="@color/black"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r2c2"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r2c3"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r2c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:textColor="@color/black"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r2c5"
+            android:textColor="@color/black"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r2c6"
+            android:textColor="@color/black"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r2c7"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r3c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:textSize="50sp"
+            android:textColor="@color/black"
+            android:textAlignment="center"/>
+
+        <TextView
+
+            android:id="@+id/game_TXT_r3c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:textColor="@color/black"
+            android:background="@color/dark_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r3c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:textSize="50sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r3c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r3c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r3c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r3c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r3c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r4c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r5c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r6c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♟"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/game_TXT_r7c0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♜"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r7c1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♞"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r7c2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♝"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r7c3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♚"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r7c4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♛"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r7c5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♝"
+            />
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:id="@+id/game_TXT_r7c6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/white_cream"
+            android:text="♞"/>
+
+        <TextView
+            android:id="@+id/game_TXT_r7c7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@color/dark_cream"
+            android:text="♜"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/chess_board">
+
+        <TextView
+            android:id="@+id/main_LBL_yourName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="yourName"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:layout_marginLeft="10sp"
+            />
+
+        <TextView
+            android:id="@+id/main_LBL_yourScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCORE: 0/0"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginRight="10sp"
+            android:visibility="visible"
+            />
+
+    </RelativeLayout>
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/main_BTN_invites"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="LEAVE"-->
+<!--        android:layout_marginBottom="60sp" />-->
+
+
+
+
+</RelativeLayout>

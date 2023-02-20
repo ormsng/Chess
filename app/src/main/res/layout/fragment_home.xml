@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".ui.home.HomeFragment">
+
+    <ImageView
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:layout_gravity="center"
+        android:src="@drawable/mysvg"></ImageView>
+
+    <TextView
+        android:id="@+id/main_LBL_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HI, OR!"
+        android:textColor="#000000"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:textStyle="bold"
+/>
+
+    <TextView
+        android:id="@+id/main_LBL_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SCORE(W/L): 0/0"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:gravity="left"
+        android:textStyle="bold"
+        android:layout_marginBottom="35sp"
+/>
+<!--    <TextView-->
+<!--        android:id="@+id/main_LBL_joined"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="JOINED: 20/02/2023"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="20sp"-->
+<!--        android:gravity="left"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginBottom="35sp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/main_LBL_joined"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="SCORE(W/L): 0/0"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="20sp"-->
+<!--        android:gravity="center"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginBottom="60sp"/>-->
+
+    <TextView
+        android:id="@+id/main_LBL_newgame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NEW GAME"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/main_ET_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter friend's name"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_invites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Invite"
+        android:layout_marginBottom="5sp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="SIGN OUT"
+        android:layout_marginBottom="60sp"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
