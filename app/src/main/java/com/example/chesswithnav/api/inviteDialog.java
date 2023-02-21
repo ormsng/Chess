@@ -1,7 +1,6 @@
 package com.example.chesswithnav.api;
 
 import static com.example.chesswithnav.ui.home.HomeFragment.enemyName;
-import static com.example.chesswithnav.ui.home.HomeFragment.newGame;
 import static com.example.chesswithnav.ui.home.HomeFragment.regCounter;
 
 import android.app.AlertDialog;
@@ -14,9 +13,11 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 public class inviteDialog extends DialogFragment {
+    private GameApi gameApi;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        gameApi = GameApi.getInstance();
         return new AlertDialog.Builder(getActivity())
                 .setTitle("New Invite")
                 .setMessage(enemyName + " has invited you to a game!")
@@ -30,8 +31,13 @@ public class inviteDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Invitation accepted
-                        newGame();
+//                        newGame();
+                        gameApi.newGame();
                         boolean inGame = true;
+
+                        gameApi.setEnemyId(gameApi.getIdByUserName(gameApi.getEnemyName()));
+                        gameApi.setChosenEnemyName(gameApi.getEnemyName());
+                        gameApi.setInGame(true);
                     }
                 })
                 .create();
@@ -47,3 +53,4 @@ public class inviteDialog extends DialogFragment {
 
 
 }
+

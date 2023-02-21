@@ -41,10 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        //setContentView(R.layout.activity_main);
-
     }
-
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
@@ -61,16 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         usersRef.child(currentUser.getUid()).child("losses").setValue(0);
     }
 
-    /**
-     * Google API, checking if the currentUser is null if yes, he will need to login/Register.
-     * If the user will register the data will be written in FB, if the user already exists,
-     * the it will load from FB
-     */
-
     private void login(FirebaseUser currentUser) {
-        if (currentUser == null) {//not found in DB
+        if (currentUser == null) {
             // Choose authentication providers
-
             List<AuthUI.IdpConfig> providers = Arrays.asList(
                     new AuthUI.IdpConfig.EmailBuilder().build(),
                     new AuthUI.IdpConfig.GoogleBuilder().build());
@@ -78,22 +68,16 @@ public class LoginActivity extends AppCompatActivity {
             // Create and launch sign-in intent
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
-                    .setAvailableProviders(providers).setIsSmartLockEnabled(false)
+                    .setAvailableProviders(providers)
+                    .setLogo(R.drawable.mysvg).setIsSmartLockEnabled(false)
                     .build();
             signInLauncher.launch(signInIntent);
 
         } else {
-            //UserDB.init(currentUser);
             checkAlreadyExists();
         }
     }
 
-
-    /**
-     * Triggered the FB with Query and check if the user already exists
-     * if the user exists it will change to boolean isNewUser to false
-     * and connect him to the app with his own data
-     */
     private void checkAlreadyExists() {
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -102,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                 isNewUser = true;
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     if (currentUser.getUid().equals(snap.getKey())) {
-                        loadUserFromDB();
                         isNewUser = false;
                         break;
                     }
@@ -110,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (isNewUser) {
                     createNewUserDB();
                 }
-                switchScreen();
+                startMainActivity();
             }
 
             @Override
@@ -119,38 +102,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-    /**
-     * Getting the current user by uid
-     */
-    private void loadUserFromDB() {
-        usersRef = usersRef.child(currentUser.getUid());
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //UserDB.getInstance().setUser(snapshot.getValue(UserDB.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void switchScreen() {
+    private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
         currentUser = mAuth.getCurrentUser();
         login(currentUser);
-
     }
 
 }

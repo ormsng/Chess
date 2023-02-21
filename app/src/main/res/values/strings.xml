@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChessWithNav</string>
+    <string name="app_name">Chess</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Play</string>
     <string name="title_notifications">Notifications</string>

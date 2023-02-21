@@ -50,6 +50,8 @@ public class HomeFragment extends Fragment {
     private static DatabaseReference gamesRef;
 
     private TextView main_LBL_title;
+    private TextView main_LBL_score;
+
     private AppCompatEditText main_ET_text;
     private MaterialButton main_BTN_update;
     private FragmentHomeBinding binding;
@@ -58,19 +60,15 @@ public class HomeFragment extends Fragment {
     public static String enemyName = "";
     boolean firstRun = true;
     public static int regCounter = 0;
-    public static String ID = "";
-    public static boolean active = false;
-    public static boolean passive = false;
-    public static boolean inGame = false;
-    public static String finalEnemyName;
-    //private GameApi gameApi;
+
+    private GameApi gameApi;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("users");
         gamesRef = database.getReference("games");
-        //GameApi gameApi = GameApi.getInstance();
-
+        gameApi = GameApi.getInstance();
+        gameApi.updateMyScore();
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -89,20 +87,22 @@ public class HomeFragment extends Fragment {
     private void initViews() {
         addEventListeners();
         main_LBL_title.setText("Hi, " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        gameApi.updateMyScore();
+        main_LBL_score.setText("SCORE:" + gameApi.getMyWins() + "/" + gameApi.getMyLosses());
     }
 
     public void addEventListeners() {
-        main_BTN_update.setOnClickListener(v -> {
-            setTitle(main_ET_text.getText().toString());
-        });
-
+        main_BTN_update.setOnClickListener(v -> inviteEnemy());
         main_ET_text.addTextChangedListener(new TextChangedListener<EditText>(main_ET_text) {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onTextChanged(EditText target, Editable s) {
-                ID = "";
                 enemyName = String.valueOf(target.getText());
-                getIdByUserName(enemyName);
-                //gameApi.getIdByUserName(String.valueOf(target.getText()));
+                if (!gameApi.isInGame()) {
+                    gameApi.setEnemyName(String.valueOf(target.getText()));
+                    gameApi.getIdByUserName(gameApi.getInstance().getEnemyName());
+                }
+
             }
         });
     }
@@ -111,6 +111,7 @@ public class HomeFragment extends Fragment {
         main_LBL_title = binding.mainLBLTitle;
         main_ET_text = binding.mainETText;
         main_BTN_update = binding.mainBTNInvites;
+        main_LBL_score = binding.mainLBLScore;
     }
 
     public void registerToInvites() {
@@ -121,11 +122,15 @@ public class HomeFragment extends Fragment {
                 regCounter++;
                 popupInviteDialog(getActivity());
                 ArrayList MyInvites = (ArrayList) snapshot.getValue();
-                if (snapshot.getValue() != null)
-                    enemyName = (String) MyInvites.get(MyInvites.size() - 1);
-                enemyId = getIdByUserName(enemyName);
-            }
 
+                if (snapshot.getValue() != null) {
+                    enemyName = (String) MyInvites.get(MyInvites.size() - 1);
+                    gameApi.setEnemyName((String) MyInvites.get(MyInvites.size() - 1));
+                }
+
+                enemyId = gameApi.getInstance().getIdByUserName(enemyName);
+                gameApi.setEnemyId(enemyId);
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -133,38 +138,74 @@ public class HomeFragment extends Fragment {
         firstRun = false;
     }
 
-    private String getIdByUserName(String enemyName) {
-        usersRef.addValueEventListener(new ValueEventListener() {
+    public void updateScore() {
+        usersRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("wins").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    for (DataSnapshot a : ds.getChildren()) {
-                        if (a.getValue().equals(HomeFragment.enemyName)) {
-                            enemyId = (String) ds.getKey();
-                            ID = (String) ds.getKey();
-                        }
-                    }
-//                    }
-                }
+                gameApi.setMyWins(String.valueOf(snapshot.getValue()));
+                System.out.println("wins is" + snapshot.getValue());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        return ID;
 
+        usersRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("losses").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                gameApi.setMyLosses(String.valueOf(snapshot.getValue()));
+                System.out.println("losses is" + snapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        usersRef.child(gameApi.getEnemyId()).child("wins").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                gameApi.setEnemyWins(String.valueOf(snapshot.getValue()));
+                System.out.println("losses enemy is" + snapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        usersRef.child(gameApi.getEnemyId()).child("losses").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                gameApi.setEnemyLosses(String.valueOf(snapshot.getValue()));
+                System.out.println("losses enemy is" + snapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     @SuppressLint("RestrictedApi")
-    private void setTitle(String title) {
-        enemyId = ID;
-        if (ID.equals("") || main_ET_text.getText().toString().trim().isEmpty()) {
+    private void inviteEnemy() {
+
+        if (gameApi.isInGame()) {
+            Toast.makeText(getApplicationContext(), "Can't invite while in a game!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (gameApi.getEnemyId().equals("") || main_ET_text.getText().toString().trim().isEmpty()) {
             Toast.makeText(getApplicationContext(), "This user doesn't exist!", Toast.LENGTH_SHORT).show();
             return;
         }
+
         exists = true;
-        DatabaseReference pendingRef = usersRef.child(ID).child("invites");
+        DatabaseReference pendingRef = usersRef.child(gameApi.getInstance().getEnemyId()).child("invites");
         pendingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -176,11 +217,14 @@ public class HomeFragment extends Fragment {
                     arr = new ArrayList<>();
                     arr.add(0, FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                 }
-                usersRef.child(ID).child("invites").setValue(arr);
-                Toast.makeText(getApplicationContext(), "Invite to " + enemyName + " sent!", Toast.LENGTH_SHORT).show();
+                usersRef.child(gameApi.getInstance().getEnemyId()).child("invites").setValue(arr);
+                Toast.makeText(getApplicationContext(), "Invite to " + gameApi.getEnemyName() + " sent!", Toast.LENGTH_SHORT).show();
                 waitForAccept();
-                active = true;
-                passive = false;
+
+                gameApi.setActive(true);
+                gameApi.setPassive(false);
+
+                updateScore();
             }
 
             @Override
@@ -188,18 +232,20 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
     }
 
     public void waitForAccept() {
-        gamesRef.child(enemyId + FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { // for all time data load.
+        gamesRef.child(gameApi.getEnemyId() + FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { // for all time data load.
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    inGame = true;
-                    finalEnemyName = enemyName;
+                    gameApi.setInGame(true);
+                    gameApi.setActive(true);
+                    gameApi.setPassive(false);
+                    //finalEnemyName = gameApi.getEnemyName();
+
+                    gameApi.setChosenEnemyName(gameApi.getEnemyName());
                 }
             }
 
@@ -210,12 +256,5 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
-    @SuppressLint("RestrictedApi")
-    public static void newGame() {
-        gamesRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid() + enemyId).child("CHESS_MATRIX").setValue("RNBQKBNRPPPPPPPPXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXpppppppprnbqkbnr");
-        passive = true;
-        active = false;
-    }
-
 }
+
