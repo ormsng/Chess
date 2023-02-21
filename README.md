@@ -1,7 +1,7 @@
 # Chess
-* This project is a live chess game built in Android Studio using Firebase for real-time database synchronization.
-* It was developed as a final project for a university course in mobile app development, with the aim of creating a fully functional chess game that allows for both local and online multiplayer.
-* The Firebase integration allows for seamless communication between devices, ensuring that all moves and game states are updated in real-time.
-
+* This project is a live chess game written in Java and uses Firebase for authentication and database purposes.
+* It was created as a final project for a mobile app development course, with the goal of providing a learning opportunity for users to improve their chess skills.
+* The game includes a full range of chess moves, an authentication system, and real-time updates for smooth gameplay.
+* Overall, this project showcases the developer's programming abilities and demonstrates how Java and Firebase can be used to create engaging mobile games.
 https://user-images.githubusercontent.com/57441511/220440137-5061715e-4b2b-4419-971f-8b4115c5479b.mp4
 
